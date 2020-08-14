@@ -1136,6 +1136,9 @@ GetDataFromSourceCode(Application_Links *app, Buffer_ID buffer, Text_Layout_ID t
             DataChunk *data_chunk = push_array_zero(arena, DataChunk, 1);
             DataChunk *first_data_chunk = data_chunk;
             DataChunk *last_data_chunk = data_chunk;
+
+            int data_count = 0;
+            float *data = 0;
             
             b32 is_negative = 0;
             for(;;)
@@ -1183,8 +1186,8 @@ GetDataFromSourceCode(Application_Links *app, Buffer_ID buffer, Text_Layout_ID t
                 }
             }
             
-            int data_count = 0;
-            float *data = push_array_zero(arena, float, total_value_count);
+            data_count = 0;
+            data = push_array_zero(arena, float, total_value_count);
             for(DataChunk *chunk = first_data_chunk; chunk; chunk = chunk->next)
             {
                 for(int i = 0; i < ArrayCount(chunk->values); i += 1)
